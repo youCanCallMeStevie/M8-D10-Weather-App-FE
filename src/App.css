@@ -1,0 +1,20 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@200;400;700;900&display=swap");
+
+:root {
+  --grey-hover: rgb(235, 235, 235);
+  --light-background: rgba(245, 245, 245, 0.5);
+  --dark-background: black;
+  --dark-caption: rgb(34, 34, 34);
+  --grey-footer: #f7f7f7;
+  --font-colour: #222222;
+  --inactive: rgb(176, 176, 176);
+  --border-radius: 20px;
+  font-family: "Nunito Sans", sans-serif;
+  --box-shadow: 0.25em 0.25em 0.25em 0.1em rgba(43, 43, 43, 0.125);
+}
+
+.App {
+  background-color: white;
+  min-height: 100vh;
+  font-family: "Nunito Sans", sans-serif;
+}

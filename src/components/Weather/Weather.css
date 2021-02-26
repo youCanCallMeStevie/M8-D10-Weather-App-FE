@@ -1,0 +1,54 @@
+.main-wrapper {
+  margin: auto;
+}
+
+.heading-container {
+  background-color: var(--light-background);
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+  padding: 5px 5px;
+}
+.temp-columns,
+.city-country {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 25px 25px;
+}
+.city-country,
+.main-temp {
+  font-size: 4rem;
+  font-weight: 700;
+  margin-top: 10%;
+  margin: auto;
+}
+
+.description-container,
+.temp-container,
+.humiditiy-container,
+.pressure-container,
+.wind-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 5px 5px;
+}
+
+.humiditiy-container,
+.pressure-container,
+.wind-container {
+  background-color: var(--light-background);
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+  margin-top: 2rem;
+}
+
+h1,
+h3 {
+  letter-spacing: 0.1em;
+  text-transform: capitalize;
+}
+
+h3 {
+}
