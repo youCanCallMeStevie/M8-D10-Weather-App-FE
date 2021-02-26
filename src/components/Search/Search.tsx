@@ -56,6 +56,11 @@ function Search({ title }: SearchProps) {
           </button>
         </p>
         </div>
+        <a
+                href={`${process.env.REACT_APP_BE_URL}/users/auth/googleLogin`}
+              >
+                LOGIN
+              </a>
         </form>
 
       </div>

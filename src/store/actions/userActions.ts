@@ -8,8 +8,6 @@ import {
   SET_LOADING,
   SET_ERROR,
 } from "../types";
-const { REACT_APP_WEATHER_BASE_URL, REACT_APP_BE_URL } = process.env;
-
 
 
 export const getUser = (): UserAction => {
