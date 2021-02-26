@@ -1,16 +1,25 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setAlert } from "../../store/actions/alertActions";
-import {getWeather, setLoading} from "../../store/actions/weatherActions"
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {faCloudSun} from "@fortawesome/free-solid-svg-icons"
+import {getWeather, setLoading} from "../../store/actions/weatherActions";
+import {getUser } from "../../store/actions/userActions";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {faCloudSun} from "@fortawesome/free-solid-svg-icons";
 
 interface SearchProps {
   title: string;
 }
 function Search({ title }: SearchProps) {
   const dispatch = useDispatch();
+  const state = useSelector(state => state)
+  console.log("STATE", state)
+// const isLogged = useSelector(state => state.user.isLoggedIn);
+//   const user = useSelector(state => state.user.profile);
+
   const [city, setCity] = useState("");
+  const[loggedIn, setLoggedIn]=useState("false")
+
+
   const handleChange = (e: React.FormEvent<HTMLInputElement>) => {
     setCity(e.currentTarget.value);
   };
@@ -52,22 +61,6 @@ function Search({ title }: SearchProps) {
       </div>
 </div>
 
-    // <div className="search-container">
-    //   <div className="">
-    //     <div className="">
-    //       <h1 className="">{title}</h1>
-    //       <form onSubmit={handleSubmit}>
-    //         <input
-    //           type="text"
-    //           placeholder="Enter city name"
-    //           value={city}
-    //           onChange={handleChange}
-    //         />
-    //         <button className="">Search</button>
-    //       </form>
-    //     </div>
-    //   </div>
-    // </div>
   );
 }
 

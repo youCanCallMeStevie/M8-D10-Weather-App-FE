@@ -4,10 +4,12 @@ import thunk from "redux-thunk";
 
 import weatherReducer from "./reducers/weatherReducer";
 import alertReducer from "./reducers/alertReducer";
+import userReducer from "./reducers/userReducer";
 
 const rootReducer= combineReducers({
     weather: weatherReducer,
-    alert: alertReducer 
+    alert: alertReducer,
+    user: userReducer
 })
 
 const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk)));

@@ -2,6 +2,24 @@ export const GET_WEATHER = "GET_WEATHER";
 export const SET_LOADING = "SET_LOADING";
 export const SET_ERROR = "SET_ERROR";
 export const SET_ALERT = "SET_ALERT";
+export const ADD_TO_FAVORITE = "ADD_TO_FAVORITE";
+export const REMOVE_FROM_FAVORITE = "REMOVE_FROM_FAVORITE";
+export const LOGIN = 'LOGIN'
+export const LOGOUT = 'LOGOUT'
+export const GET_USER = "GET_USER";
+
+
+export interface Favorite{
+  city: string;
+}
+
+ export interface UserData {
+  name:string;
+  surname:  string;
+  username: string;
+  email: string;
+  favorites: Favorite [];
+ }
 
 export interface Weather {
   description: string;
@@ -56,10 +74,21 @@ export interface WeatherError{
     message: string;
 }
 
+export interface UserError{
+  message: string;
+}
+
 export interface WeatherState{
     data: WeatherData | null;
     loading: boolean;
     error: string;
+}
+
+export interface UserState{
+  data: UserData | null;
+  loading: boolean;
+  error: string;
+  isLoggedIn: boolean;
 }
 
 interface GetWeatherAction {
@@ -67,8 +96,17 @@ interface GetWeatherAction {
     payload: WeatherData;
 }
 
+interface GetUserDataAction {
+  type: typeof GET_USER;
+  payload: UserData;
+}
+
 interface SetLoadingAction {
     type: typeof SET_LOADING;
+}
+
+interface LoginAction {
+  type: typeof LOGIN;
 }
 
 interface SetErrorAction {
@@ -76,7 +114,10 @@ interface SetErrorAction {
     payload: string
 }
 
+export type UserAction = LoginAction | GetUserDataAction | SetLoadingAction | SetErrorAction
+
 export type WeatherAction = GetWeatherAction | SetLoadingAction | SetErrorAction
+
 
 export interface AlertAction{
     type: typeof SET_ALERT;
@@ -86,39 +127,3 @@ export interface AlertAction{
 export interface AlertState{
     message: string;
 }
-// {
-//     "coord": {
-//       "lon": -122.08,
-//       "lat": 37.39
-//     },
-//     "base": "stations",
-//     "main": {
-//       "temp": 282.55,
-//       "feels_like": 281.86,
-//       "temp_min": 280.37,
-//       "temp_max": 284.26,
-//       "pressure": 1023,
-//       "humidity": 100
-//     },
-//     "visibility": 16093,
-//     "wind": {
-//       "speed": 1.5,
-//       "deg": 350
-//     },
-//     "clouds": {
-//       "all": 1
-//     },
-//     "dt": 1560350645,
-//     "sys": {
-//       "type": 1,
-//       "id": 5122,
-//       "message": 0.0139,
-//       "country": "US",
-//       "sunrise": 1560343627,
-//       "sunset": 1560396563
-//     },
-//     "timezone": -25200,
-//     "id": 420006353,
-//     "name": "Mountain View",
-//     "cod": 200
-//     }

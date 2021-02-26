@@ -9,6 +9,8 @@ import { setError } from "./store/actions/weatherActions";
 import Alert from "./components/Alert/Alert";
 import Loader from "./Loader/Loader"
 import {getWeather, setLoading} from "./store/actions/weatherActions"
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 function App() {
   const dispatch = useDispatch();
