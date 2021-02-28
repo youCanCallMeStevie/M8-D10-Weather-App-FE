@@ -1,20 +1,25 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setAlert } from "../../store/actions/alertActions";
+import {UserState} from "../../store/types"
 import {getWeather, setLoading} from "../../store/actions/weatherActions";
 import {getUser } from "../../store/actions/userActions";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {faCloudSun} from "@fortawesome/free-solid-svg-icons";
-
+import {faCloudSun, faHeart} from "@fortawesome/free-solid-svg-icons";
+// import {Link} from "react-router-dom"
 interface SearchProps {
   title: string;
 }
+interface State {
+user:UserState,
+}
 function Search({ title }: SearchProps) {
   const dispatch = useDispatch();
-  const state = useSelector(state => state)
+  const state = useSelector((state) => state)
   console.log("STATE", state)
-// const isLogged = useSelector(state => state.user.isLoggedIn);
-//   const user = useSelector(state => state.user.profile);
+  //const isLogged = state.user.isLoggedIn
+ const isLogged = useSelector((state:State) => state.user.isLoggedIn);
+ const user = useSelector((state:State) => state.user.data);
 
   const [city, setCity] = useState("");
   const[loggedIn, setLoggedIn]=useState("false")
@@ -56,6 +61,24 @@ function Search({ title }: SearchProps) {
           </button>
         </p>
         </div>
+        {isLogged && (
+            <div className="mr-5" style={{display: "contents"}}>
+              <div className="">Hi, {user?.name}</div>
+            
+                <FontAwesomeIcon icon={faHeart} />
+                {user && user.favorites?.length && (<div>`${user.favorites?.length}`</div>)}
+              </div>          )}
+          <button >
+            {!isLogged ? (
+              <a
+                href={`${process.env.REACT_APP_BE_URL}/users/auth/googleLogin`}
+              >
+                LOGIN
+              </a>
+            ) : (
+              <div >LOGOUT</div>
+            )}
+          </button>
         <a
                 href={`${process.env.REACT_APP_BE_URL}/users/auth/googleLogin`}
               >
