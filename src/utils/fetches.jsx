@@ -5,7 +5,7 @@ export const getUserInfo = async() =>{
         withCredentials:true
       })
       const data = await res.data
-      // console.log(data)
+      console.log("getuserinfo data",data)
       return data
     }catch(err){console.log(err)}
   }

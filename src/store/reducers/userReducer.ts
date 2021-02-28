@@ -7,43 +7,45 @@ import {
     GET_USER,
     SET_ERROR,
     UserAction,
-    UserState
+    UserState,
+    LoginDispachTypes,
+  LOGIN_FAIL,
+  LOGIN_SUCCESS,
+  LOGIN_LOADING,
   } from "../types";
   
 
   const initialState: UserState = {
-    data: null,
+    profile: null,
     loading: false,
     error: "",
     isLoggedIn: false
   };
   
   
-  export default (state = initialState, action: UserAction): UserState => {
+  export default (state = initialState, action: LoginDispachTypes): UserState => {
     switch (action.type) {
-        case LOGIN:
+        case LOGIN_SUCCESS:
             return{
             ...state,
-            isLoggedIn: true
+            isLoggedIn: true,
+            profile: action.payload,
+            error: ""
+
         }
-      case GET_USER:
+      case LOGIN_LOADING:
         return {
-          data: action.payload,
-          loading: false,
+          ...state,
+          profile: null,
+          loading: true,
           error: "",
-          isLoggedIn: true
         };
        
-      case SET_LOADING:
+      case LOGIN_FAIL:
         return {
           ...state,
-          loading: true,
-        };
-      case SET_ERROR:
-        return {
-          ...state,
-          error: action.payload,
           loading: false,
+          error: "Login was not succesful",
         };
       default:
         return state;

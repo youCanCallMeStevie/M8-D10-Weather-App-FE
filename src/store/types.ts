@@ -7,6 +7,9 @@ export const REMOVE_FROM_FAVORITE = "REMOVE_FROM_FAVORITE";
 export const LOGIN = 'LOGIN'
 export const LOGOUT = 'LOGOUT'
 export const GET_USER = "GET_USER";
+export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
+export const LOGIN_LOADING = "LOGIN_LOADING";
+export const LOGIN_FAIL = "LOGIN_FAIL";
 
 
 export interface Favorite{
@@ -85,7 +88,7 @@ export interface WeatherState{
 }
 
 export interface UserState{
-  data: UserData | null;
+  profile: UserData | null;
   loading: boolean;
   error: string;
   isLoggedIn: boolean;
@@ -127,3 +130,18 @@ export interface AlertAction{
 export interface AlertState{
     message: string;
 }
+
+//LOGIN
+export interface LoginLoading {
+  type: typeof LOGIN_LOADING;
+}
+export interface LoginSuccess {
+  type: typeof LOGIN_SUCCESS;
+  payload: any;
+}
+export interface LoginFail {
+  type: typeof LOGIN_FAIL;
+}
+
+
+export type LoginDispachTypes = LoginLoading | LoginSuccess | LoginFail;
