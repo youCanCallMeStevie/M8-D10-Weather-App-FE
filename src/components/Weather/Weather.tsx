@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import { WeatherData } from "../../store/types";
 import "../Weather/Weather.css";
 
@@ -10,6 +10,9 @@ function Weather({ data }: WeatherProps) {
   const cDegrees = (data.data.main.temp - 273.15).toFixed(1);
   const backgroundImage = `/images/${data?.data.weather[0].icon}.jpeg`;
   console.log("data.data", data.data)
+  const [isFav, setIsFave] = useState(false);
+
+
   return (
     <section
       style={{

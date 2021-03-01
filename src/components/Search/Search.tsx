@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setAlert } from "../../store/actions/alertActions";
-import { UserState } from "../../store/types";
+import { Favorite, UserState } from "../../store/types";
 import { getWeather, setLoading } from "../../store/actions/weatherActions";
-import { getCurrentUser } from "../../store/actions/userActions";
+import { getCurrentUser, addFavCity, removeFavCity } from "../../store/actions/userActions";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCloudSun, faHeart } from "@fortawesome/free-solid-svg-icons";
 // import {Link} from "react-router-dom"
@@ -13,30 +13,41 @@ interface SearchProps {
 interface State {
   user: UserState;
 }
-function Search({ title }: SearchProps) {
+
+// interface Props {
+//   city: Favorite
+// }
+function Search({ title }: SearchProps ) {
   const dispatch = useDispatch();
   // const state = useSelector((state) => state)
   const isLogged = useSelector((state: State) => state.user.isLoggedIn);
   const user = useSelector((state: State) => state.user.profile);
-  console.log("user", user);
-  const [city, setCity] = useState("");
-  const [loggedIn, setLoggedIn] = useState("false");
+  // const isFav = useSelector((state: State) => state.user.profile?.favCities)
+
+	// const addFavorite = () => {
+	// 	dispatch(addFavCity(props.city));
+	// };
+
+	// const removeFavorite = () => {
+	// 	dispatch(removeFavCity(props.city));
+	// };
+  const [cityWeather, setCityWeather] = useState("");
 
   useEffect(() => {
     dispatch(getCurrentUser());
   }, []);
 
   const handleChange = (e: React.FormEvent<HTMLInputElement>) => {
-    setCity(e.currentTarget.value);
+    setCityWeather(e.currentTarget.value);
   };
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (city.trim() === "") {
+    if (cityWeather.trim() === "") {
       return dispatch(setAlert("City is required"));
     }
     dispatch(setLoading());
-    dispatch(getWeather(city));
-    setCity("");
+    dispatch(getWeather(cityWeather));
+    setCityWeather("");
   };
 
   return (
@@ -47,7 +58,7 @@ function Search({ title }: SearchProps) {
             <input
               type="text"
               placeholder="Enter city name"
-              value={city}
+              value={cityWeather}
               onChange={handleChange}
               style={{ fontSize: "20px" }}
             />
@@ -61,16 +72,26 @@ function Search({ title }: SearchProps) {
               </button>
             </p>
           </div>
-          {isLogged && (
+          {/* {isLogged && (
             <div className="mr-5" style={{ display: "contents" }}>
               <div className="">Hi, {user?.name}</div>
-
+              {user?.favCities.includes(props.city) ? (
+							<div className='fav-btn' onClick={removeFavorite}>
               <FontAwesomeIcon icon={faHeart} />
-              {user && user.favorites?.length && (
-                <div>`${user.favorites?.length}`</div>
+							</div>
+						) : (
+							<div className='fav-btn' onClick={addFavorite}>
+              <FontAwesomeIcon icon={faHeart} />
+							</div>
+						)}
+            </div> */}
+          {/* )} */}
+              {user && user.favCities?.length && (
+                <div>`${user.favCities?.length}`</div>
               )}
-            </div>
-          )}
+
+
+
           <button>
             {!isLogged ? (
               <a
@@ -79,7 +100,11 @@ function Search({ title }: SearchProps) {
                 LOGIN
               </a>
             ) : (
-              <div>LOGOUT</div>
+              <a
+                href={`${process.env.REACT_APP_BE_URL}/users/auth/logout`}
+              >
+                LOGOUT
+              </a>
             )}
           </button>
         </form>
